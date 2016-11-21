@@ -62,14 +62,14 @@ TASK(InitTask)
    leds = ciaaPOSIX_open(OUTPUTS, ciaaPOSIX_O_RDWR);
    buttons = ciaaPOSIX_open(INPUTS, ciaaPOSIX_O_RDONLY);
 
-   n = 0;
+   n = 1;
    salida = 0;
 
    SetRelAlarm(ActivateTask1, 400, 400);
    SetRelAlarm(ActivateTask2, 600, 600);
    SetRelAlarm(ActivateTask3, 800, 800);
-   SetRelAlarm(ActivatePeriodicTask5, 350, 50);
-   SetRelAlarm(ActivateSwitchesTask, 350, 100);
+   SetRelAlarm(ActivatePeriodicTask5, 0, 50);
+   SetRelAlarm(ActivateSwitchesTask, 0, 100);
 
    TerminateTask();
 }
@@ -83,6 +83,8 @@ TASK(Task1)
 	uint8 outputs;
 	/* write blinking message */
 	ciaaPOSIX_printf("Task1\n");
+
+	printf("Valor de N: &d\n",n*1);
 
 	/* blink output */
 	ciaaPOSIX_read(leds, &outputs, 1);
@@ -102,6 +104,8 @@ TASK(Task2)
 	/* write blinking message */
 	ciaaPOSIX_printf("Task2\n");
 
+	printf("Valor de N: &d\n",n*10);
+
 	/* blink output */
 	ciaaPOSIX_read(leds, &outputs, 1);
 	outputs ^= 0x10;
@@ -120,6 +124,8 @@ TASK(Task3)
 	uint8 outputs;
 	/* write blinking message */
 	ciaaPOSIX_printf("Task3\n");
+
+	printf("Valor de N: &d\n",n*100);
 
 	/* blink output */
 	ciaaPOSIX_read(leds, &outputs, 1);
@@ -153,8 +159,6 @@ TASK(PeriodicTask5)
 		ciaaPOSIX_write(leds, &outputs, 1);
 	}
 
-	//Imprime n*1000
-
 	TerminateTask();
 }
 
@@ -165,6 +169,7 @@ TASK(SwitchesTask)
 
 	if((inputs&0x01) == 0){
 		if(led4 == 0){
+			printf("Valor de N: &d\n",n*1000);
 			led4 = 1;
 		}else{
 			led4 = 0;

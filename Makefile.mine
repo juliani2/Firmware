@@ -94,3 +94,4 @@ BOARD          ?= edu_ciaa_nxp
 # examples/rtos_example              (example using rtos)
 #trabajo_practico_str
 PROJECT_PATH ?= examples$(DS)trabajo_practico_str
+LDFLAGS += --specs=rdimon.specs -lc -lrdimon

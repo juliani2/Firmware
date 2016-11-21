@@ -112,7 +112,7 @@ OSEK OSEK {
    }
    
     TASK PeriodicTask5 {
-      PRIORITY = 2;
+      PRIORITY = 12;
       ACTIVATION = 1;
       STACK = 512;
       TYPE = EXTENDED;
@@ -122,7 +122,7 @@ OSEK OSEK {
    }
    
    TASK SwitchesTask {
-       PRIORITY = 4;
+       PRIORITY = 11;
    	   ACTIVATION = 1;
    	   STACK = 512;
    	   TYPE = EXTENDED;
