@@ -12,9 +12,6 @@
 /*==================[internal functions declaration]=========================*/
 
 /*==================[internal data definition]===============================*/
-static uint8 led1=0;
-static uint8 led2=0;
-static uint8 led3=0;
 static uint8 led4;
 static int n;
 static int salida;
@@ -55,9 +52,6 @@ TASK(InitTask)
    /* init CIAA kernel and devices */
    ciaak_start();
 
-   /* print message (only on x86) */
-   ciaaPOSIX_printf("Init Task...\n");
-
    /* open CIAA digital outputs & inputs */
    leds = ciaaPOSIX_open(OUTPUTS, ciaaPOSIX_O_RDWR);
    buttons = ciaaPOSIX_open(INPUTS, ciaaPOSIX_O_RDONLY);
@@ -65,9 +59,9 @@ TASK(InitTask)
    n = 1;
    salida = 0;
 
-   SetRelAlarm(ActivateTask1, 400, 400);
-   SetRelAlarm(ActivateTask2, 600, 600);
-   SetRelAlarm(ActivateTask3, 800, 800);
+   SetRelAlarm(ActivateTask1, 200, 200);
+   SetRelAlarm(ActivateTask2, 400, 400);
+   SetRelAlarm(ActivateTask3, 600, 600);
    SetRelAlarm(ActivatePeriodicTask5, 0, 50);
    SetRelAlarm(ActivateSwitchesTask, 0, 100);
 
@@ -81,10 +75,8 @@ TASK(InitTask)
 TASK(Task1)
 {
 	uint8 outputs;
-	/* write blinking message */
-	ciaaPOSIX_printf("Task1\n");
 
-	printf("Valor de N: &d\n",n*1);
+	//printf("Valor de N: %d\n",n*1);
 
 	/* blink output */
 	ciaaPOSIX_read(leds, &outputs, 1);
@@ -101,10 +93,8 @@ TASK(Task1)
 TASK(Task2)
 {
 	uint8 outputs;
-	/* write blinking message */
-	ciaaPOSIX_printf("Task2\n");
 
-	printf("Valor de N: &d\n",n*10);
+	//printf("Valor de N: %d\n",n*10);
 
 	/* blink output */
 	ciaaPOSIX_read(leds, &outputs, 1);
@@ -122,10 +112,8 @@ TASK(Task2)
 TASK(Task3)
 {
 	uint8 outputs;
-	/* write blinking message */
-	ciaaPOSIX_printf("Task3\n");
 
-	printf("Valor de N: &d\n",n*100);
+	//printf("Valor de N: %d\n",n*100);
 
 	/* blink output */
 	ciaaPOSIX_read(leds, &outputs, 1);
@@ -169,7 +157,7 @@ TASK(SwitchesTask)
 
 	if((inputs&0x01) == 0){
 		if(led4 == 0){
-			printf("Valor de N: &d\n",n*1000);
+			//printf("Valor de N: %d\n",n*1000);
 			led4 = 1;
 		}else{
 			led4 = 0;

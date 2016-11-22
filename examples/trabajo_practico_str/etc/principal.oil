@@ -102,7 +102,7 @@ OSEK OSEK {
    }
       
    TASK Task4 {
-      PRIORITY = 8;
+      PRIORITY = 4;
       ACTIVATION = 1;
       STACK = 512;
       TYPE = EXTENDED;
@@ -116,7 +116,7 @@ OSEK OSEK {
       ACTIVATION = 1;
       STACK = 512;
       TYPE = EXTENDED;
-      SCHEDULE = FULL;
+      SCHEDULE = NON;
       RESOURCE = POSIXR;
       EVENT = POSIXE;
    }
