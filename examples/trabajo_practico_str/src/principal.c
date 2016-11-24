@@ -156,12 +156,14 @@ TASK(SwitchesTask)
 	ciaaPOSIX_read(buttons, &inputs, 1);
 
 	if((inputs&0x01) == 0){
+		
 		if(led4 == 0){
 			//printf("Valor de N: %d\n",n*1000);
 			led4 = 1;
-		}else{
-			led4 = 0;
 		}
+		
+	}else{
+		led4 = 0;
 	}
 
 	if((inputs&0x08) == 0){
